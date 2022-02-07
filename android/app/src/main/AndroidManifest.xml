@@ -3,6 +3,9 @@
    <application
         android:label="proyecto_paco"
         android:icon="@mipmap/ic_launcher">
+<meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyCOBbsxzNDdxMXQ7OV319_jbcKhsJKk3lU"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

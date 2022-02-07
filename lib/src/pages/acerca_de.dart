@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:proyecto_paco/src/pages/maps.dart';
 import 'package:proyecto_paco/src/utils/creaDrawer.dart';
 import 'package:proyecto_paco/src/utils/llamaPorTelefono.dart';
 
@@ -34,6 +36,16 @@ class AcercaDe extends StatelessWidget {
           ButtonBar(
             children: [
               LlamaTelWidget('123456789'),
+              IconButton(
+                icon: Icon(Icons.fmd_good_outlined),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UbicacionPB()));
+                },
+              )
+              /*GoogleMap(
+                  initialCameraPosition: CameraPosition(
+                      target: LatLng(39.8227229, -0.2342613), zoom: 30))*/
             ],
           ),
         ]),
