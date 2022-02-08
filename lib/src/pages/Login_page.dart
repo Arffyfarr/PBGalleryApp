@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:proyecto_paco/src/gallery_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'Register_page.dart';
 
 class Login_page extends StatefulWidget {
@@ -12,6 +13,8 @@ class Login_page extends StatefulWidget {
 }
 
 class _Login_page extends State<Login_page> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String email = '', password = '';
   /*String user = '';
   String pass = '';
   final UserController = TextEditingController();
@@ -50,10 +53,9 @@ class _Login_page extends State<Login_page> {
                             Icon(Icons.account_box, color: (Colors.white)),
                         icon: Icon(Icons.login, color: (Colors.white)),
                         labelStyle: new TextStyle(color: Colors.white)),
-                    /*onChanged: (value) {
-                      user = value;
-                      setState(() {});
-                    },*/
+                    onChanged: (value) {
+                      email = value;
+                    },
                   ),
                   SizedBox(
                     height: 30,
@@ -77,10 +79,9 @@ class _Login_page extends State<Login_page> {
                       icon: Icon(Icons.lock, color: (Colors.white)),
                       labelStyle: new TextStyle(color: Colors.white),
                     ),
-                    /*onChanged: (value) {
-                      pass = value;
-                      setState(() {});
-                    },*/
+                    onChanged: (value) {
+                      password = value;
+                    },
                   ),
                   SizedBox(
                     height: 30,
@@ -89,7 +90,29 @@ class _Login_page extends State<Login_page> {
                     style: ElevatedButton.styleFrom(
                         primary: Colors.black12, onPrimary: Colors.white),
                     child: Text("Entrar"),
-                    onPressed: () {
+                    onPressed: () async {
+                      try {
+                        final user = await auth.signInWithEmailAndPassword(
+                            email: email, password: password);
+                        if (user != null) {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return GalleryPage();
+                            },
+                          ));
+                        }
+                      } catch (e) {
+                        Fluttertoast.showToast(
+                            msg: e.toString(),
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      }
+                    },
+                    /*onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => GalleryPage()),
@@ -99,7 +122,7 @@ class _Login_page extends State<Login_page> {
                           email: user, password: pass).whenComplete(() => 
                           )
                         db.collection("users").where(user == "admin").get();*/
-                    },
+                    },*/
                   ),
                   SizedBox(
                     height: 30,
