@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:proyecto_paco/src/gallery_page.dart';
 import 'package:proyecto_paco/src/pages/Login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -38,3 +40,15 @@ Future firebaseUsuario() async {
   final usuario = await FirebaseAuth.instance.currentUser;
   return usuario;
 }
+/*
+Future selectFile() async {
+  final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+
+  if (result == null) return;
+  final path = result.files.single.path!;
+
+  setState(() => file = File(path));
+}
+
+Future uploadfile() async {}
+*/

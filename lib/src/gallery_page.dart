@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_paco/src/pages/Afegir_Imagens.dart';
 import 'package:proyecto_paco/src/utils/creaDrawer.dart';
 
 class GalleryPage extends StatelessWidget {
@@ -18,6 +19,13 @@ class GalleryPage extends StatelessWidget {
         ),
       ),
       drawer: buildDrawer(context),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add_a_photo),
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AfegirImagens()));
+        },
+      ),
     );
   }
   /*
