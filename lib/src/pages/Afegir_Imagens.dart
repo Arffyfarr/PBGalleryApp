@@ -18,7 +18,9 @@ class _AfegirImagensState extends State<AfegirImagens> {
   File? file;
   @override
   Widget build(BuildContext context) {
-    final fileName = file != null ? basename(file!.path) : 'No File Selected';
+    final fileName = file != null
+        ? basename(file!.path)
+        : 'No se ha seleccionado una imagen';
     return Scaffold(
       appBar: AppBar(
         title: Text('Añadir Imagenes'),
@@ -35,13 +37,6 @@ class _AfegirImagensState extends State<AfegirImagens> {
                   onPressed: selectFile,
                   child: Text('Selecciona una imagen'),
                 ),
-                /*
-              ButtonWidget(
-                text: 'Select File',
-                icon: Icons.attach_file,
-                onClicked: selectFile,
-              ),
-              */
                 SizedBox(height: 8),
                 Text(
                   fileName,
@@ -52,13 +47,6 @@ class _AfegirImagensState extends State<AfegirImagens> {
                   onPressed: uploadfile,
                   child: Text('Carga la imagen'),
                 ),
-                /*
-              ButtonWidget(
-                text: 'Upload File',
-                icon: Icons.cloud_upload_outlined,
-                onClicked: uploadFile,
-              ),
-              */
                 SizedBox(height: 20),
                 task != null ? buildUploadStatus(task!) : Container(),
               ],
@@ -71,7 +59,7 @@ class _AfegirImagensState extends State<AfegirImagens> {
 
   Future selectFile() async {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
-
+    //Con esto se limita a subir máximo una imagen a la vez
     if (result == null) return;
     final path = result.files.single.path!;
 
